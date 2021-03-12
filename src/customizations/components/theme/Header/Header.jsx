@@ -70,7 +70,7 @@ class Header extends Component {
             </ul>
           </div>
           <div className="header-row2">
-            <p>Twenty Twenty-One Space for a slogan</p>
+            <p>Twenty Twenty-One! Create your own inovative slogan.</p>
           </div>
         </Container>
       </Segment>
