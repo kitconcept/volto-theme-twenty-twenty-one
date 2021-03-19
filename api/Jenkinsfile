@@ -1,0 +1,260 @@
+#!groovy
+
+pipeline {
+
+  agent {
+    label 'node'
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'20'))
+    skipDefaultCheckout()
+    disableConcurrentBuilds()
+    timeout(time: 60, unit: 'MINUTES')
+  }
+
+  stages {
+
+    // --- BUILD ---
+    stage('Build') {
+      parallel {
+        stage('Backend') {
+          agent {
+            label "node"
+          }
+          steps {
+            deleteDir()
+            checkout scm
+            sh 'make build-backend'
+            sh 'tar cfz backend.tgz api Makefile'
+            stash includes: 'backend.tgz', name: 'backend.tgz'
+          }
+        }
+        stage('Frontend') {
+          agent {
+            label "node"
+          }
+          steps {
+            deleteDir()
+            checkout scm
+            sh "make build-frontend"
+            sh 'tar cfz frontend.tgz locales node_modules cypress public src theme babel.config.js .eslintrc jsconfig.json cypress.json Makefile package.json razzle.config.js yarn.lock'
+            stash includes: 'frontend.tgz', name: 'frontend.tgz'
+          }
+        }
+      }
+    }
+
+    // Static Code Analysis
+    stage('Static Code Analysis') {
+      parallel {
+        stage('Backend') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            checkout scm
+            unstash 'backend.tgz'
+            sh 'tar xfz backend.tgz'
+            sh '(cd api && bin/black  --check src/)'
+            sh 'make code-analysis'
+            sh 'find . -name flake8.log'
+          }
+          post {
+            always {
+              recordIssues enabledForFailure: true, aggregatingResults: true, tool: flake8(pattern: '**/flake8.log')
+            }
+          }
+        }
+        stage('Frontend') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            checkout scm
+            unstash 'frontend.tgz'
+            sh 'tar xfz frontend.tgz'
+            sh 'yarn run prettier'
+            sh 'yarn run ci:lint'
+            sh 'cat eslint.xml'
+          }
+          post {
+            always {
+              recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+            }
+          }
+        }
+      }
+    }
+
+    // -- UNIT TESTS ---
+    stage('Unit Tests') {
+      parallel {
+        stage('Backend') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            unstash 'backend.tgz'
+            sh 'tar xfz backend.tgz'
+            sh "make test-backend"
+          }
+          post {
+            always {
+              step([
+                $class: 'JUnitResultArchiver',
+                testResults: 'api/parts/test/testreports/*.xml'
+              ])
+            }
+          }
+        }
+        stage('Frontend') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            unstash 'frontend.tgz'
+            sh 'tar xfz frontend.tgz'
+            sh "CI=true make test-frontend"
+          }
+          post {
+            always {
+              step([
+                $class: 'JUnitResultArchiver',
+                testResults: 'junit.xml'
+              ])
+            }
+          }
+        }
+      }
+    }
+
+    // Acceptance Tests
+    stage('Acceptance Tests') {
+      agent {
+        label 'node'
+      }
+      steps {
+        deleteDir()
+        unstash 'backend.tgz'
+        sh 'tar xfz backend.tgz'
+        unstash 'frontend.tgz'
+        sh 'tar xfz frontend.tgz'
+        sh 'yarn cy:install'
+        wrap([$class: 'Xvfb']) {
+          sh 'yarn ci:cypress:run'
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: 'cypress/videos/**/*.mp4', fingerprint: true, allowEmptyArchive: true
+          archiveArtifacts artifacts: 'cypress/screenshots/**/*.png', fingerprint: true, allowEmptyArchive: true
+          junit 'results/cypress-report-*.xml'
+        }
+      }
+    }
+
+    // --- DEPLOYMENT TO kitconcept ---
+    stage('Deployment to kitconcept') {
+      parallel {
+        stage('Backend') {
+          agent {
+            label 'kitconcept.io'
+          }
+          when {
+            branch 'master'
+          }
+          steps {
+            sh '(cd /srv/kitconcept && git fetch --all && git reset --hard origin/master)'
+            sh '(cd /srv/kitconcept/api && pm2 stop kitconcept-api-dev)'
+            sh '(cd /srv/kitconcept/api && bin/buildout -c dev.cfg)'
+            sh '(cd /srv/kitconcept/api && pm2 start kitconcept-api-dev)'
+          }
+        }
+        stage('Frontend') {
+          agent {
+            label 'kitconcept.io'
+          }
+          when {
+            branch 'master'
+          }
+          steps {
+            deleteDir()
+            checkout scm
+            sh '(cd /srv/kitconcept && yarn install)'
+            sh '(cd /srv/kitconcept && PORT=MODIFYME RAZZLE_API_PATH=https://kitconcept/api yarn build)'
+            sh '(cd /srv/kitconcept && pm2 restart kitconcept-volto-dev)'
+          }
+        }
+      }
+    }
+
+    // Performance Tests
+    stage('Performance Tests') {
+      parallel {
+        stage('Lighthouse') {
+          agent {
+            label 'node'
+          }
+          when {
+            branch 'master'
+          }
+          steps {
+            deleteDir()
+            checkout scm
+            sh 'yarn install'
+            sh 'yarn run lighthouse:ci'
+            sh 'cat lighthouse-report.html | true'
+          }
+          // post {
+          //   always {
+          //     publishHTML (target: [
+          //       allowMissing: false,
+          //       alwaysLinkToLastBuild: false,
+          //       keepAll: true,
+          //       reportDir: '.',
+          //       reportFiles: 'lighthouse-report.html',
+          //       reportName: "Lighthouse"
+          //     ])
+          //   }
+          // }
+        }
+      }
+    }
+
+  }
+
+  post {
+    success {
+      slackSend (
+        color: 'good',
+        message: "SUCCESS: #${env.BUILD_NUMBER} ${env.JOB_NAME} (${env.BUILD_URL})"
+      )
+    }
+    failure {
+      slackSend (
+        color: 'danger',
+        message: "FAILURE: #${env.BUILD_NUMBER} ${env.JOB_NAME} (${env.BUILD_URL})"
+      )
+    }
+    unstable {
+      slackSend (
+        color: 'warning',
+        message: "UNSTABLE: #${env.BUILD_NUMBER} ${env.JOB_NAME} (${env.BUILD_URL})"
+      )
+    }
+    aborted {
+      slackSend (
+        color: 'danger',
+        message: "ABORTED: #${env.BUILD_NUMBER} ${env.JOB_NAME} (${env.BUILD_URL})"
+      )
+    }
+    always {
+      sh 'rm -rf node_modules *.tgz'
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object>
+ <resourcetypes>
+  <!-- Tiny containers type list config -->
+  <!-- <containsobjects purge="False">
+   <element value="Document"/>
+  </containsobjects> -->
+ </resourcetypes>
+</object>

@@ -1,0 +1,156 @@
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
+  <!-- Default metadata (title, mail, etc) -->
+  <record name="plone.site_title" interface="Products.CMFPlone.interfaces.controlpanel.ISiteSchema" field="site_title">
+    <value>kitconcept</value>
+  </record>
+  <record name="plone.email_from_address" interface="Products.CMFPlone.interfaces.controlpanel.IMailSchema" field="email_from_address">
+    <value>noreply@kitconcept.com</value>
+  </record>
+  <record name="plone.email_from_name" interface="Products.CMFPlone.interfaces.controlpanel.IMailSchema" field="email_from_name">
+    <value>kitconcept GmbH</value>
+  </record>
+
+  <!-- Restrict types to display in navigation -->
+  <!-- <record name="plone.displayed_types" interface="Products.CMFPlone.interfaces.controlpanel.INavigationSchema" field="displayed_types">
+    <value>
+      <element>Folder</element>
+      <element>Document</element>
+    </value>
+  </record> -->
+
+  <!-- Set default language to de -->
+  <record name="plone.default_language" interface="Products.CMFPlone.interfaces.controlpanel.ILanguageSchema" field="default_language">
+    <field type="plone.registry.field.Choice">
+      <default>de</default>
+      <description>The language used for the content and the UI of this site.</description>
+      <title>Site language</title>
+      <vocabulary>plone.app.vocabularies.AvailableContentLanguages</vocabulary>
+    </field>
+    <value>de</value>
+  </record>
+  <!-- Set language to de/en -->
+  <record name="plone.available_languages" interface="Products.CMFPlone.interfaces.controlpanel.ILanguageSchema" field="available_languages">
+    <field type="plone.registry.field.List">
+      <default>
+        <element>en</element>
+      </default>
+      <description>The languages in which the site should be translatable.</description>
+      <missing_value/>
+      <title>Available languages</title>
+      <value_type type="plone.registry.field.Choice">
+        <vocabulary>plone.app.vocabularies.AvailableContentLanguages</vocabulary>
+      </value_type>
+    </field>
+    <value>
+      <element>de</element>
+      <element>en</element>
+    </value>
+  </record>
+
+  <!-- Used in multilingual sites -->
+  <!-- <record name="plone.use_cookie_negotiation" interface="Products.CMFPlone.interfaces.controlpanel.ILanguageSchema" field="use_cookie_negotiation">
+    <field type="plone.registry.field.Bool">
+      <default>False</default>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="description_cookie_manual_override">Required for the language selector viewlet to be rendered.</description>
+      <required>False</required>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="heading_cookie_manual_override">Use cookie for manual override</title>
+    </field>
+    <value>True</value>
+  </record>
+  <record name="plone.use_request_negotiation" interface="Products.CMFPlone.interfaces.controlpanel.ILanguageSchema" field="use_request_negotiation">
+    <field type="plone.registry.field.Bool">
+      <default>False</default>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="description_browser_language_request_negotiation">Use browser language request negotiation.</description>
+      <required>False</required>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="heading_browser_language_request_negotiation">Use browser language request negotiation</title>
+    </field>
+    <value>True</value>
+  </record> -->
+
+  <!-- Set first weekday to Monday -->
+  <record name="plone.first_weekday" interface="Products.CMFPlone.interfaces.controlpanel.IDateAndTimeSchema" field="first_weekday">
+    <field type="plone.registry.field.Choice">
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="help_first_weekday">First day in the week.</description>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="label_first_weekday">First weekday</title>
+      <vocabulary>plone.app.vocabularies.Weekdays</vocabulary>
+    </field>
+    <value>0</value>
+  </record>
+
+  <!-- Icon visibility -->
+  <!-- <record name="plone.icon_visibility" interface="Products.CMFPlone.interfaces.controlpanel.ISiteSchema" field="icon_visibility">
+    <field type="plone.registry.field.Choice">
+      <default>enabled</default>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="">Show icons in listings</description>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="">Icon visibility</title>
+      <values>
+        <element>false</element>
+        <element>enabled</element>
+        <element>authenticated</element>
+      </values>
+    </field>
+    <value>false</value>
+  </record> -->
+
+  <!-- Add criteria to Collections -->
+  <!-- <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.my_custom_index">
+    <value key="title">My fancy title for the index</value>
+    <value key="description">My fancy title for the index</value>
+    <value key="enabled">True</value>
+    <value key="sortable">False</value>
+    <value key="operations">
+        <element>plone.app.querystring.operation.boolean.isTrue</element>
+        <element>plone.app.querystring.operation.boolean.isFalse</element>
+    </value>
+    <value key="group" i18n:translate="">Metadata</value>
+  </records> -->
+
+  <!-- <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.my_custom_index_tied_to_a_vocab">
+    <value key="title">My fancy title for the index with dynamic vocab</value>
+    <value key="description">My fancy title for the index with dynamic vocab</value>
+    <value key="enabled">True</value>
+    <value key="sortable">False</value>
+    <value key="operations">
+        <element>plone.app.querystring.operation.selection.any</element>
+    </value>
+    <value key="vocabulary">kitconcept.volto-theme-twenty-twenty-one.vocabulary.my_dynamic_vocab_tied_to_the_index</value>
+    <value key="group" i18n:translate="">Metadata</value>
+  </records> -->
+
+  <!-- <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.my_custom_index_tied_to_a_vocab">
+    <value key="title">My fancy title for the index with dynamic vocab 2</value>
+    <value key="description">My fancy title for the index with dynamic vocab 2</value>
+    <value key="enabled">True</value>
+    <value key="sortable">False</value>
+    <value key="operations">
+        <element>plone.app.querystring.operation.selection.any</element>
+        <element>plone.app.querystring.operation.string.contains</element>
+        <element>plone.app.querystring.operation.string.is</element>
+        <element>plone.app.querystring.operation.selection.is</element>
+        <element>plone.app.querystring.operation.string.path</element>
+        <element>plone.app.querystring.operation.string.relativePath</element>
+        <element>plone.app.querystring.operation.string.absolutePath</element>
+    </value>
+    <value key="vocabulary">kitconcept.volto-theme-twenty-twenty-one.vocabulary.my_dynamic_vocab_tied_to_the_index</value>
+    <value key="group" i18n:translate="">Metadata</value>
+  </records> -->
+
+  <!-- Allowed sizes -->
+  <!-- <record name="plone.allowed_sizes" interface="Products.CMFPlone.interfaces.controlpanel.IImagingSchema" field="allowed_sizes">
+    <value purge="false">
+      <element>slider 1145:449</element>
+      <element>header 851:337</element>
+      <element>thumb 270:381</element>
+      <element>inhaltsbild 722:480</element>
+      <element>teaserbild 264:154</element>
+    </value>
+  </record> -->
+
+  <!-- Set more Plone pages default types -->
+  <!-- <record name="plone.default_page_types" interface="Products.CMFPlone.interfaces.ITypesSchema" field="default_page_types">
+    <value purge="false">
+      <element>Kontakte</element>
+    </value>
+  </record> -->
+
+</registry>

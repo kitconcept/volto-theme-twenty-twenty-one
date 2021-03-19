@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<portlets>
+  <!-- Define new portlets -->
+  <!-- <portlet
+    addview="portlets.myportlet"
+    title="Special Events Portlet"
+    description=""
+    /> -->
+
+  <!-- Remove the standard portlets -->
+
+  <!-- <assignment
+    manager="plone.leftcolumn"
+    category="context"
+    key="/"
+    type="portlets.Navigation"
+    name="navigation"
+    remove="true"
+    />
+
+  <assignment
+    manager="plone.rightcolumn"
+    category="context"
+    key="/"
+    type="portlets.News"
+    name="news"
+    remove="true"
+    />
+
+  <assignment
+    manager="plone.rightcolumn"
+    category="context"
+    key="/"
+    type="portlets.Events"
+    name="events"
+    remove="true"
+    /> -->
+
+  <!-- Add portlets to homepage -->
+  <!-- <assignment
+    manager="plone.rightcolumn"
+    category="context"
+    key="/front-page"
+    type="portlets.Events"
+    name="events"
+    /> -->
+
+  <!-- Disable standard portlets -->
+  <!-- <portlet addview="portlets.Login" remove="true" />
+  <portlet addview="portlets.Actions" remove="true" />
+  <portlet addview="portlets.Classic" remove="true" />
+  <portlet addview="portlets.Calendar" remove="true" />
+  <portlet addview="portlets.rss" remove="true" />
+  <portlet addview="portlets.Search" remove="true" />
+  <portlet addview="portlets.Review" remove="true" />
+  <portlet addview="portlets.Recent" remove="true" /> -->
+
+</portlets>

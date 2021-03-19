@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <version>1000</version>
+  <dependencies>
+    <dependency>profile-kitconcept.volto:default</dependency>
+    <!-- <dependency>profile-kitconcept.theme:default</dependency> -->
+  </dependencies>
+</metadata>
