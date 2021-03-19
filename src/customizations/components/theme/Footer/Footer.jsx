@@ -52,13 +52,13 @@ const Footer = ({ intl }) => (
           </a>
         </div>
         <div className="footer-row2">
-          <h2>Twenty Twenty-One</h2>
-          <p>
+          <h4>Twenty Twenty-One</h4>
+          <span className="footer-text">
             Proudly powered by{' '}
             <a className="link-1" href="#">
               kitconcept.
             </a>
-          </p>
+          </span>
         </div>
       </Segment>
     </Container>
