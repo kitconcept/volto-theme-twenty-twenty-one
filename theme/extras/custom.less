@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: flex-end;
   padding: 0px 30px 5px 30px;
+  color: black;
 
   logo {
     text-transform: uppercase;
@@ -29,7 +30,6 @@
         text-decoration: underline;
         text-underline-offset: 2px;
         text-decoration-style: dotted;
-        text-decoration-color: #b7393e;
       }
     }
   }
@@ -38,13 +38,13 @@
 .active-site {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: #b7393e;
 }
 
 .header-row2 {
   padding: 0px 30px 5px 30px;
   span {
     font-size: 25px;
+    color: black;
   }
 }
 
@@ -53,73 +53,182 @@
 
 body.contenttype-document {
   .documentFirstHeading {
-    font-size: 200px;
+    font-size: 190px;
     font-weight: 200;
+    font-family: 'PS Sans';
     padding-bottom: 50px;
-    border-bottom: solid black 4px;
     margin-bottom: 100px;
-  }
-
-  .documentFirstHeading::first-letter {
-    color: #b7393e;
+    line-height: 105%;
+    color: #333;
   }
 
   .ui.breadcrumbs {
     display: none;
   }
+
   h2 {
-    font-size: 40px;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 4px;
-    text-decoration-color: #b7393e;
-    margin-bottom: 30px;
+    font-size: 34px;
+    font-family: 'Weissenhof Grotesk';
+    font-weight: 400;
+    margin-bottom: 35px;
+    color: #333;
   }
 
   h3 {
-    font-size: 30px;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: #b7393e;
-    margin-bottom: 30px;
+    font-size: 20px;
+    font-family: 'Weissenhof Grotesk';
+    font-weight: bold;
+    margin-bottom: 22px;
+    color: #333;
   }
 
   p {
     font-size: 20px;
+    font-family: 'Weissenhof Grotesk';
+    color: #333;
+    font-weight: 200;
+    margin-bottom: 30px;
+    width: 850px;
   }
 
-  p::first-letter {
-    font-size: 35px;
-    color: #b7393e;
+  b,
+  strong {
+    font-weight: 500;
+  }
+
+  em {
+    font-style: italic;
+    font-weight: 100;
+  }
+
+  li {
+    font-size: 18px;
+    font-weight: 400;
+    padding-bottom: 8px;
+  }
+
+  ul {
+    margin-bottom: 60px;
   }
 
   .block.image.align.center {
-    box-shadow: 6px 6px 6px 6px rgba(83, 82, 82, 0.507);
-    margin-bottom: 100px;
+    width: 1000px;
+    padding: 0px 120px 0px 0px;
+    position: relative;
+    right: 45px;
+    .figure.center.large {
+      img {
+        width: 800px;
+        height: 520px;
+      }
+      figcaption {
+        background-color: #eeeeee;
+        color: #666;
+        font-family: 'Weissenhof Grotesk';
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px 0px 0px 20px;
+        font-size: 18px;
+        font-weight: 400;
+        &.description {
+          height: 50px;
+        }
+        &.rights {
+          height: 90px;
+        }
+      }
+    }
+    .figure.center.medium {
+      img {
+        width: 650px;
+        height: 280px;
+      }
+      figcaption {
+        background-color: #eeeeee;
+        color: #666;
+        font-family: 'Weissenhof Grotesk';
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px 0px 0px 20px;
+        margin-left: 200px;
+        font-size: 18px;
+        font-weight: 400;
+        width: 400px;
+        &.description {
+          height: 50px;
+        }
+        &.rights {
+          height: 90px;
+        }
+      }
+    }
+    .figure.center.small {
+      img {
+        width: 180px;
+        height: 125px;
+      }
+      figcaption {
+        background-color: #eeeeee;
+        color: #666;
+        font-family: 'Weissenhof Grotesk';
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px 0px 0px 20px;
+        margin-left: 305px;
+        font-size: 18px;
+        font-weight: 400;
+        width: 190px;
+        &.description {
+          height: 50px;
+        }
+        &.rights {
+          height: 90px;
+        }
+      }
+    }
   }
 
   .block.image.align.left {
-    img {
-      &.medium {
-        border-right: solid #3f3d56 2px;
-        border-bottom: solid #3f3d56 2px;
-        box-shadow: 3px 3px 3px 3px rgba(83, 82, 82, 0.507);
+    figure {
+      img {
+        &.small {
+        }
+        &.medium {
+        }
+        &.large {
+        }
+      }
+      figcaption {
+        &.description {
+        }
       }
     }
   }
 
   .block.image.align.right {
-    img {
-      &.medium {
-        border-right: solid #3f3d56 2px;
-        border-bottom: solid #3f3d56 2px;
-        box-shadow: 3px 3px 3px 3px rgba(83, 82, 82, 0.507);
+    figure {
+      img {
+        &.small {
+        }
+        &.medium {
+        }
+        &.large {
+        }
+      }
+      figcaption {
+        &.description {
+        }
       }
     }
   }
 
   .block-inner-wrapper {
-    margin-bottom: 50px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    box-shadow: 5px 5px 5px 5px rgba(83, 82, 82, 0.507);
 
     img {
       &.hero-image {
@@ -130,24 +239,13 @@ body.contenttype-document {
     div {
       &.hero-body {
         background-color: #3f3d56;
-        color: #e6e6e6;
-      }
-    }
-  }
+        h1 {
+          color: #e6e6e6;
+        }
 
-  .block.html {
-    ul {
-      font-size: 25px;
-      list-style: none;
-      li {
-        margin-bottom: 10px;
-      }
-      li::before {
-        content: '\2022';
-        color: #b7393e;
-        display: inline-block;
-        margin-right: 10px;
-        font-weight: bolder;
+        p {
+          color: #e6e6e6;
+        }
       }
     }
   }
@@ -171,8 +269,7 @@ body.contenttype-document {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  border-bottom: solid black 5px;
-  color: black;
+  border-bottom: solid #2f2e41 5px;
   background-color: white;
   padding-bottom: 45px;
   img {
@@ -193,7 +290,7 @@ body.contenttype-document {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  color: black;
+  color: #2f2e41;
   background-color: white;
   padding-top: 45px;
   h4 {
@@ -204,8 +301,9 @@ body.contenttype-document {
   span {
     text-decoration: none;
     font-size: 25px;
+    color: #2f2e41;
     a {
-      color: black;
+      color: #b7393e;
       text-decoration: underline;
       text-decoration-thickness: 2px;
       text-underline-offset: 2px;

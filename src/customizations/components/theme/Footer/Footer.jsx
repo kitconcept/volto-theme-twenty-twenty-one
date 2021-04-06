@@ -7,10 +7,10 @@ import React from 'react';
 import { Container, List, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import IconFbook from '../../../../../theme/assets/facebook.svg';
-import IconTwit from '../../../../../theme/assets/twitter.svg';
-import IconInst from '../../../../../theme/assets/instagram.svg';
-import IconMail from '../../../../../theme/assets/mail.svg';
+import IconFbook from '../../../../../theme/assets/facebook.png';
+import IconTwit from '../../../../../theme/assets/twitter.png';
+import IconInst from '../../../../../theme/assets/instagram.png';
+import IconMail from '../../../../../theme/assets/mail.png';
 
 const messages = defineMessages({
   copyright: {
