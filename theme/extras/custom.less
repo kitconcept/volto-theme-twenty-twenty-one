@@ -111,116 +111,217 @@ body.contenttype-document {
     margin-bottom: 60px;
   }
 
-  .block.image.align.center {
-    width: 1000px;
-    padding: 0px 120px 0px 0px;
-    position: relative;
-    right: 45px;
-    .figure.center.large {
-      img {
-        width: 800px;
-        height: 520px;
-      }
-      figcaption {
-        background-color: #eeeeee;
-        color: #666;
-        font-family: 'Weissenhof Grotesk';
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 20px 0px 0px 20px;
-        font-size: 18px;
-        font-weight: 400;
-        &.description {
-          height: 50px;
-        }
-        &.rights {
-          height: 90px;
-        }
-      }
-    }
-    .figure.center.medium {
-      img {
-        width: 650px;
-        height: 280px;
-      }
-      figcaption {
-        background-color: #eeeeee;
-        color: #666;
-        font-family: 'Weissenhof Grotesk';
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 20px 0px 0px 20px;
-        margin-left: 200px;
-        font-size: 18px;
-        font-weight: 400;
-        width: 400px;
-        &.description {
-          height: 50px;
-        }
-        &.rights {
-          height: 90px;
-        }
-      }
-    }
-    .figure.center.small {
-      img {
-        width: 180px;
-        height: 125px;
-      }
-      figcaption {
-        background-color: #eeeeee;
-        color: #666;
-        font-family: 'Weissenhof Grotesk';
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 20px 0px 0px 20px;
-        margin-left: 305px;
-        font-size: 18px;
-        font-weight: 400;
-        width: 190px;
-        &.description {
-          height: 50px;
-        }
-        &.rights {
-          height: 90px;
-        }
-      }
-    }
-  }
+  // .block.image.align.center {
+  //   width: 1000px;
+  //   padding: 0px 120px 0px 0px;
+  //   position: relative;
+  //   right: 45px;
+  //   .figure.center.large {
+  //     img {
+  //       width: 800px;
+  //       height: 20px;
+  //     }
+  //     figcaption {
+  //       background-color: #eeeeee;
+  //       color: #666;
+  //       font-family: 'Weissenhof Grotesk';
+  //       display: flex;
+  //       justify-content: flex-start;
+  //       align-items: flex-start;
+  //       padding: 20px 0px 0px 20px;
+  //       font-size: 18px;
+  //       font-weight: 400;
+  //       &.description {
+  //         height: 50px;
+  //       }
+  //       &.rights {
+  //         height: 90px;
+  //       }
+  //     }
+  //   }
+  //   .figure.center.medium {
+  //     img {
+  //       width: 650px;
+  //       height: 280px;
+  //     }
+  //     figcaption {
+  //       background-color: #eeeeee;
+  //       color: #666;
+  //       font-family: 'Weissenhof Grotesk';
+  //       display: flex;
+  //       justify-content: flex-start;
+  //       align-items: flex-start;
+  //       padding: 20px 0px 0px 20px;
+  //       margin-left: 200px;
+  //       font-size: 18px;
+  //       font-weight: 400;
+  //       width: 400px;
 
-  .block.image.align.left {
+  //       &.description {
+  //         height: 50px;
+  //       }
+  //       &.rights {
+  //         height: 90px;
+  //       }
+  //     }
+  //   }
+  //   .figure.center.small {
+  //     img {
+  //       width: 180px;
+  //       height: 125px;
+  //     }
+  //     figcaption {
+  //       background-color: #eeeeee;
+  //       color: #666;
+  //       font-family: 'Weissenhof Grotesk';
+  //       display: flex;
+  //       justify-content: flex-start;
+  //       align-items: flex-start;
+  //       padding: 20px 0px 0px 20px;
+  //       margin-left: 305px;
+  //       font-size: 18px;
+  //       font-weight: 400;
+  //       width: 190px;
+  //       &.description {
+  //         height: 50px;
+  //       }
+  //       &.rights {
+  //         height: 90px;
+  //       }
+  //     }
+  //   }
+  // }
+
+  .block.image {
+    margin: 0;
+
     figure {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      background: #eee;
+
       img {
-        &.small {
-        }
-        &.medium {
-        }
-        &.large {
+        width: 100% !important;
+        object-fit: contain;
+      }
+
+      &.right {
+        margin-bottom: 16px;
+        margin-left: 2rem;
+        float: right;
+
+        img {
+          margin-right: 0 !important;
+          margin-bottom: 0px;
+          margin-left: 0 !important;
+          float: none;
+          object-fit: contain;
+          object-position: right;
         }
       }
-      figcaption {
-        &.description {
+
+      &.left {
+        margin-right: 2rem;
+        margin-bottom: 16px;
+        float: left;
+
+        img {
+          margin-right: 0 !important;
+          margin-bottom: 0px;
+          float: none;
+          object-fit: contain;
+          object-position: left;
+        }
+      }
+
+      &.left,
+      &.right {
+        &.large {
+          width: 50%;
+        }
+
+        &.medium {
+          width: 25%;
+        }
+
+        &.small {
+          width: 15%;
+        }
+      }
+
+      &.center {
+        width: 100% !important;
+        margin-right: auto;
+        margin-left: auto;
+        object-fit: cover;
+
+        img {
+          margin-right: initial;
+          margin-left: initial;
+        }
+
+        &.large {
+          width: 100% !important;
+        }
+
+        &.medium {
+          width: 50% !important;
+        }
+
+        &.small {
+          width: 25% !important;
+        }
+
+        &.large {
+          figcaption {
+            text-align: start;
+          }
+        }
+
+        &.medium {
+          figcaption {
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            text-align: start;
+          }
         }
       }
     }
-  }
 
-  .block.image.align.right {
-    figure {
-      img {
-        &.small {
-        }
-        &.medium {
-        }
-        &.large {
-        }
+    img {
+      max-width: 100% !important;
+    }
+
+    p {
+      padding-left: 20px;
+      margin-bottom: 0px;
+      color: #666;
+      font-size: 14px;
+      line-height: 19px;
+      text-align: left;
+    }
+
+    figcaption {
+      padding-left: 20px;
+      text-align: left;
+
+      &.description {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        color: #666;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 19px;
       }
-      figcaption {
-        &.description {
-        }
+
+      &.rights {
+        padding-bottom: 20px;
+        color: #8a8a8a;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 19px;
       }
     }
   }

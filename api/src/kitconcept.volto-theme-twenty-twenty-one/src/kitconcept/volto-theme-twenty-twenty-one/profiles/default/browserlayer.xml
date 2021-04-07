@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layers>
+  <layer name="kitconcept.volto-theme-twenty-twenty-one" interface="kitconcept.volto-theme-twenty-twenty-one.interfaces.IKitconceptvolto-theme-twenty-twenty-oneLayer" />
+</layers>

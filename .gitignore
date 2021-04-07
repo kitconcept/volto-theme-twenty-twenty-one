@@ -12,5 +12,8 @@ build
 .env.test.local
 .env.production.local
 
+bin
+lib
+pyvenv.cfg
 data
 omelette

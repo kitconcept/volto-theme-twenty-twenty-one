@@ -1,0 +1,81 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="kitconcept.volto-theme-twenty-twenty-one">
+
+  <i18n:registerTranslations directory="locales" />
+
+  <includeDependencies package="." />
+
+  <include package=".behaviors" />
+
+  <include file="upgrades.zcml" />
+
+  <!-- Enable overrides (if required) -->
+  <!-- <includeOverrides file="overrides.zcml" /> -->
+
+  <!-- <permission
+    id="kitconcept.newpermission"
+    title="kitconcept: Manage Something"
+    /> -->
+
+  <genericsetup:registerProfile
+      name="default"
+      title="kitconcept site (kitconcept.volto-theme-twenty-twenty-one)"
+      directory="profiles/default"
+      description="Installs the kitconcept.volto-theme-twenty-twenty-one add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
+      />
+
+  <genericsetup:registerProfile
+    name="content"
+    title="kitconcept site (example content)"
+    directory="profiles/content"
+    description="kitconcept site with example content for testing."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.import_content"
+    />
+
+  <genericsetup:registerProfile
+    name="testing"
+    title="kitconcept site (testing)"
+    directory="profiles/testing"
+    description="kitconcept site with example content for testing."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.testing_content"
+    />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="kitconcept site (kitconcept.volto-theme-twenty-twenty-one): uninstall"
+      directory="profiles/uninstall"
+      description="Uninstalls the kitconcept.volto-theme-twenty-twenty-one add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.uninstall"
+      />
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="kitconcept.volto-theme-twenty-twenty-one-hiddenprofiles" />
+
+  <!-- Indexers/Metadata -->
+  <!-- <adapter name="lead_image_file" factory=".indexers.leadImageFile" /> -->
+
+  <!-- Vocabularies -->
+  <!-- <utility
+    component=".vocabularies.simple_vocabulary"
+    name="kitconcept.volto-theme-twenty-twenty-one.vocabulary.simple_vocabulary"
+    /> -->
+
+  <!-- Subscribers -->
+  <!-- <subscriber
+    for="plone.app.contenttypes.interfaces.ICollection
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".subscribers.subscriber_action"
+    /> -->
+
+</configure>

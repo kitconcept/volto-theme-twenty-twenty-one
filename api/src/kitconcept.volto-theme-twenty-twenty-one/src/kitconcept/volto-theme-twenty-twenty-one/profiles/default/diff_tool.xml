@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object>
+  <!-- Used to add versioning to content types -->
+  <!-- <difftypes purge="false">
+    <type portal_type="Pressemitteilung">
+      <field name="any" difftype="Compound Diff for Dexterity types"/>
+    </type>
+  </difftypes> -->
+</object>
